@@ -2,6 +2,12 @@
 
 logo css to add to projects.
 
+## Setup
+add the css file as a dependency
+```html
+<link rel="stylesheet" href="<path-to-repo>\kb-logo.css">
+```
+
 ## How to use
 
 Basic HTML structure:
