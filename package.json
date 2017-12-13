@@ -1,0 +1,25 @@
+{
+  "name": "kibibit-logo",
+  "version": "1.0.0",
+  "description": "CSS for kibibit's logo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "./node_modules/.bin/gulp sass",
+    "watch": "./node_modules/.bin/gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kibibit/kibibit-logo.git"
+  },
+  "author": "neilkalman@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kibibit/kibibit-logo/issues"
+  },
+  "homepage": "https://github.com/Kibibit/kibibit-logo#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}
