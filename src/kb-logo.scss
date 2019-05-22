@@ -25,289 +25,307 @@ $logo-state-transition-length: 250ms;
 // squiggly - make loader animation squiggly
 // always-squiggly - make entire logo squiggly
 .kb-logo {
-    white-space: nowrap;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    font-size: 1em;
-    line-height: 1em;
-    font-family: 'Righteous', cursive;
-    color: white;
-    transition: all 500ms;
+  white-space: nowrap;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 1em;
+  line-height: 1em;
+  font-family: 'Righteous', cursive;
+  color: white;
+  transition: all 500ms;
+  box-sizing: content-box;
+
+  * {
     box-sizing: content-box;
+  }
 
-    * {
-      box-sizing: content-box;
+  // MODIFIERS
+
+  &.always-k-t .letter {
+    opacity: 1 !important;
+  }
+
+  &.always-squiggly {
+    -webkit-animation: squiggly-animation-filter $squiggly-animation-length linear infinite;
+    animation: squiggly-animation-filter $squiggly-animation-length linear infinite;
+  }
+
+  &.purple {
+    color: lighten(#682A8D, 20%) !important;
+  }
+
+  &.no-extra-colors {
+    .shape-animation.shape-zero .shape2 {
+      border-color: currentColor !important;
+      background: transparent !important;
     }
 
-    // MODIFIERS
-
-    &.always-k-t .letter {
-        opacity: 1 !important;
+    .shape {
+      background: currentColor !important;
     }
+  }
 
+  // 10101 with size animation
+  &.loader,
+  &.kb-loader {
+    animation: change-font-size $change-font-size-length linear 500ms infinite;
+    font-size: 21vw;
+
+    &.squiggly,
     &.always-squiggly {
-        -webkit-animation: squiggly-animation-filter $squiggly-animation-length linear infinite;
-        animation: squiggly-animation-filter $squiggly-animation-length linear infinite;
+      animation: change-font-size $change-font-size-length linear 500ms infinite, squiggly-animation-filter $squiggly-animation-length linear infinite;
+      font-size: 21vw;
     }
 
-    &.purple {
-        color: lighten(#682A8D, 20%) !important;
+    .shape-animation .shape1,
+    .shape-animation .shape2 {
+      transition: all $logo-state-transition-length ease-in-out, background $logo-state-transition-length ease-in-out;
+    }
+  }
+
+  // state: kibibit name
+  &.full-logo {
+    .shape-animation {
+      &.to-red .shape {
+        background: #E31B36;
+      }
+
+      &.to-blue .shape {
+        background: #00A2C9;
+      }
+
+      &.to-yellow .shape {
+        background: #EEB146;
+      }
+
+      &.shape-zero {
+        .shape1 {
+          height: 65%;
+        }
+
+        .shape2 {
+          height: 0.2625em;
+        }
+      }
+
+      &.shape-one {
+        .shape1 {
+          width: 0.1875em;
+          height: 0.1875em;
+          top: 0;
+          left: -0.025em;
+          right: -0.025em;
+          border-radius: 50%;
+        }
+
+        .shape2 {
+          height: 70%;
+        }
+      }
     }
 
-    &.no-extra-colors {
-        .shape-animation.shape-zero .shape2 {
-            border-color: currentColor !important;
-            background: transparent !important;
-        }
-        .shape {
-            background: currentColor !important;
-        }
-    }
-
-    // 10101 with size animation
-    &.loader {
-        animation: change-font-size $change-font-size-length linear 500ms infinite;
-        font-size: 21vw;
-
-        &.squiggly,
-        &.always-squiggly {
-            animation: change-font-size $change-font-size-length linear 500ms infinite, squiggly-animation-filter $squiggly-animation-length linear infinite;
-            font-size: 21vw;
-        }
-
-        .shape-animation .shape1,
-        .shape-animation .shape2 {
-            transition: all $logo-state-transition-length ease-in-out, background $logo-state-transition-length ease-in-out;
-        }
-    }
-
-    // state: kibibit name
-    &.full-logo {
-        .shape-animation {
-            &.to-red .shape {
-                background: #E31B36;
-            }
-
-            &.to-blue .shape {
-                background: #00A2C9;
-            }
-
-            &.to-yellow .shape {
-                background: #EEB146;
-            }
-
-            &.shape-zero {
-                .shape1 {
-                    height: 65%;
-                }
-                .shape2 {
-                    height: 0.2625em;
-                }
-            }
-            &.shape-one {
-                .shape1 {
-                    width: 0.1875em;
-                    height: 0.1875em;
-                    top: 0;
-                    left: -0.025em;
-                    right: -0.025em;
-                    border-radius: 50%;
-                }
-
-                .shape2 {
-                    height: 70%;
-                }
-            }
-        }
-
-        .letter {
-            opacity: 1;
-        }
-    }
-
-    // STATE: k1b1b0t
-    &.k1b1b0t {
-        transform: translate(0, -0.5em);
-        .shape-animation.shape-zero {
-            // height: auto;
-        }
-
-        .shape-animation.shape-zero .shape2 {
-            bottom: 0.1em;
-            height: 0.1em;
-            animation: blink 2s infinite 250ms;
-        }
-
-        .shape-one:first-of-type .shape1 {
-            left: 0;
-            right: -0.06875em;
-        }
-
-        .shape-one.middle .shape1 {
-            right: -0.06875em;
-        }
-
-        .k1b1b0t-mouth-container {
-            .k1b1b0t-mouth {
-                height: 100%;
-            }
-        }
-    }
-
-    // STATE: 10101. details:
-    // * letters are hidden
     .letter {
-        opacity: 0;
-        transition: all $logo-state-transition-length $shape-easing-elastic-2;
+      opacity: 1;
+    }
+  }
+
+  // STATE: k1b1b0t
+  &.k1b1b0t {
+    transform: translate(0, -0.5em);
+
+    .shape-animation.shape-zero {
+      // height: auto;
+    }
+
+    .shape-animation.shape-zero .shape2 {
+      bottom: 0.1em;
+      height: 0.1em;
+      animation: blink 2s infinite 250ms;
+    }
+
+    .shape-one:first-of-type .shape1 {
+      left: 0;
+      right: -0.06875em;
+    }
+
+    .shape-one.middle .shape1 {
+      right: -0.06875em;
     }
 
     .k1b1b0t-mouth-container {
-        margin-left: 0.11em;
-        font-size: 0.5em;
-        overflow: hidden;
-        top: 100%;
+      .k1b1b0t-mouth {
+        height: 100%;
+      }
+    }
+  }
+
+  // STATE: 10101. details:
+  // * letters are hidden
+  .letter {
+    opacity: 0;
+    transition: all $logo-state-transition-length $shape-easing-elastic-2;
+  }
+
+  .k1b1b0t-mouth-container {
+    margin-left: 0.11em;
+    font-size: 0.5em;
+    overflow: hidden;
+    top: 100%;
+    position: absolute;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+
+    .k1b1b0t-mouth {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      height: 0;
+      transition: all 500ms ease 300ms;
+    }
+  }
+
+  // two kind of shapes:
+  // 0 - sub-shape1 is hidden, sub-shape2 is the zero
+  // 1 - sub-shape1 is the horizontal line, sub-shape2 is the vertical line
+  .shape-animation {
+    display: inline-block;
+    position: relative;
+    transition: all $logo-state-transition-length ease-in-out;
+
+    &.shape-zero {
+      margin: 0 0.03125em;
+      display: inline-block;
+      height: 0.75em;
+      width: 0.5625em;
+      position: relative;
+
+      .shape1 {
+        width: 0.14375em;
+        height: 0;
+        background: currentColor;
+        z-index: 500;
         position: absolute;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 1em;
+        bottom: 35%;
+        left: 0;
+      }
 
-        .k1b1b0t-mouth {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            height: 0;
-            transition: all 500ms ease 300ms;
-        }
+      .shape2 {
+        width: 0.25em;
+        height: 0.40625em;
+        background: transparent;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-radius: 0.28125em;
+        border: 0.15em solid currentColor;
+      }
     }
 
-    // two kind of shapes:
-    // 0 - sub-shape1 is hidden, sub-shape2 is the zero
-    // 1 - sub-shape1 is the horizontal line, sub-shape2 is the vertical line
-    .shape-animation {
-        display: inline-block;
-        position: relative;
-        transition: all $logo-state-transition-length ease-in-out;
+    &.shape-one {
+      margin: 0 0.0625em;
+      display: inline-block;
+      height: 0.7625em;
+      width: 0.14375em;
 
-        &.shape-zero {
-            margin: 0 0.03125em;
-            display: inline-block;
-            height: 0.75em;
-            width: 0.5625em;
-            position: relative;
+      .shape1 {
+        background: currentColor;
+        position: absolute;
+        top: 0.05625em;
+        right: 0;
+        height: 0.15em;
+        left: -0.06875em;
+      }
 
-            .shape1 {
-                width: 0.14375em;
-                height: 0;
-                background: currentColor;
-                z-index: 500;
-                position: absolute;
-                bottom: 35%;
-                left: 0;
-            }
-
-            .shape2 {
-                width: 0.25em;
-                height: 0.40625em;
-                background: transparent;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                border-radius: 0.28125em;
-                border: 0.15em solid currentColor;
-            }
-        }
-
-        &.shape-one {
-            margin: 0 0.0625em;
-            display: inline-block;
-            height: 0.7625em;
-            width: 0.14375em;
-
-            .shape1 {
-                background: currentColor;
-                position: absolute;
-                top: 0.05625em;
-                right: 0;
-                height: 0.15em;
-                left: -0.06875em;
-            }
-
-            .shape2 {
-                width: 0.14375em;
-                height: 92.5%;
-                background: currentColor;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-            }
-        }
-
-        .shape1,
-        .shape2 {
-            transition: all $logo-state-transition-length $shape-easing-elastic-1, background $logo-state-transition-length $shape-easing-elastic-2;
-        }
+      .shape2 {
+        width: 0.14375em;
+        height: 92.5%;
+        background: currentColor;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
     }
+
+    .shape1,
+    .shape2 {
+      transition: all $logo-state-transition-length $shape-easing-elastic-1, background $logo-state-transition-length $shape-easing-elastic-2;
+    }
+  }
 }
 
 @keyframes squiggly-animation-filter {
-    0% {
-        -webkit-filter: url("#squiggly-0");
-        filter: url("#squiggly-0");
-    }
-    25% {
-        -webkit-filter: url("#squiggly-1");
-        filter: url("#squiggly-1");
-    }
-    50% {
-        -webkit-filter: url("#squiggly-2");
-        filter: url("#squiggly-2");
-    }
-    75% {
-        -webkit-filter: url("#squiggly-3");
-        filter: url("#squiggly-3");
-    }
-    100% {
-        -webkit-filter: url("#squiggly-4");
-        filter: url("#squiggly-4");
-    }
+  0% {
+    -webkit-filter: url("#squiggly-0");
+    filter: url("#squiggly-0");
+  }
+
+  25% {
+    -webkit-filter: url("#squiggly-1");
+    filter: url("#squiggly-1");
+  }
+
+  50% {
+    -webkit-filter: url("#squiggly-2");
+    filter: url("#squiggly-2");
+  }
+
+  75% {
+    -webkit-filter: url("#squiggly-3");
+    filter: url("#squiggly-3");
+  }
+
+  100% {
+    -webkit-filter: url("#squiggly-4");
+    filter: url("#squiggly-4");
+  }
 }
+
 @keyframes change-font-size {
-    0% {
-        font-size: $font-anim-1;
-    }
-    10% {
-        font-size: $font-anim-1;
-    }
-    40% {
-        font-size: $font-anim-2;
-    }
-    60% {
-        font-size: $font-anim-2;
-    }
-    100% {
-        font-size: $font-anim-1;
-    }
+  0% {
+    font-size: $font-anim-1;
+  }
+
+  10% {
+    font-size: $font-anim-1;
+  }
+
+  40% {
+    font-size: $font-anim-2;
+  }
+
+  60% {
+    font-size: $font-anim-2;
+  }
+
+  100% {
+    font-size: $font-anim-1;
+  }
 }
 
 @keyframes blink {
-    0% {
-        height: 0.1em;
-    }
-    45% {
-        height: 0.1em;
-    }
-    50% {
-        height: 0;
-    }
-    55% {
-        height: 0.1em;
-    }
-    100% {
-        height: 0.1em;
-    }
+  0% {
+    height: 0.1em;
+  }
+
+  45% {
+    height: 0.1em;
+  }
+
+  50% {
+    height: 0;
+  }
+
+  55% {
+    height: 0.1em;
+  }
+
+  100% {
+    height: 0.1em;
+  }
 }
